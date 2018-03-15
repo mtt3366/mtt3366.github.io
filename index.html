@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,96 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-使用GitHub（一）：添加SSHkey" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/15/使用GitHub（一）：添加SSHkey/" class="article-date">
+  <time datetime="2018-03-15T11:36:15.000Z" itemprop="datePublished">2018-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/使用GitHub（一）：添加SSHkey/">使用GitHub（一）：添加SSHkey</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用GitHub（一）：添加SSHkey"><a href="#使用GitHub（一）：添加SSHkey" class="headerlink" title="使用GitHub（一）：添加SSHkey"></a>使用GitHub（一）：添加SSHkey</h1><blockquote>
+<ul>
+<li>本文简单介绍使用GitHub对代码进行版本控制，包括<strong>添加SSHkey</strong>、<strong>配置Git</strong>、<strong>使用Git创建版本库</strong>并在GitHub上进行管理，主要目的是对学习内容进行总结以及方便日后查阅。</li>
+<li>详细教程和原理可以参考<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰的Git教程</a>或<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">猴子都能看懂的Git教程</a>。</li>
+<li>本文版权归马涛涛所有。</li>
+<li>本文所引用的图片和文字版权归原作者所有，侵权删。</li>
+<li>如有错误请在下方评论区指出，欢迎积极讨论。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="添加SSHkey"><a href="#添加SSHkey" class="headerlink" title="添加SSHkey"></a>添加SSHkey</h2><blockquote>
+<ul>
+<li>简单说，SSH是一种<strong>网络协议</strong>，用于计算机之间的<strong>加密登录</strong>。</li>
+<li>如果一个用户从本地计算机，<strong>使用SSH</strong>协议登录另一台远程计算机，我们就可以认为，这种登录是<strong>安全</strong>的，即使被中途截获，密码也不会泄露。</li>
+<li>最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者TatuYlonen设计了SSH协议，将<strong>登录信息全部加密</strong>，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。</li>
+<li>在这里你只需要知道使用GitHub之前需要添加SSHkey，用来验证GitHub远程仓库就可以了，如果想深入了解原理，参考<a href="%EF%BC%88https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/%EF%BC%89">阮一峰SSH原理</a>。</li>
+</ul>
+</blockquote>
+<p>步骤：</p>
+<ol>
+<li>进入 <a href="https://github.com/settings/keys" target="_blank" rel="noopener">https://github.com/settings/keys</a></li>
+<li>如果页面里已经有一些 key，就点「delete」按钮把这些 key 全删掉。如果没有，就往下看<br><img src="https://s1.ax1x.com/2018/03/15/94Niz8.png" alt="参考示例"></li>
+<li>点击 New SSH key，你需要输入 Title 和 Key，但是你现在没有 key，往下看<blockquote>
+<p>添加步骤参考<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="noopener">这里</a></p>
+</blockquote>
+</li>
+<li>打开 Git Bash</li>
+<li>复制并运行 <code>rm -rf ~/.ssh/*</code> 把现有的 ssh key都删掉，这句命令行如果你多打一个空格，可能就要重装系统了，建议复制运行。</li>
+<li>运行 <code>ssh-keygen -t rsa -b 4096 -C &quot;你的邮箱&quot;</code>，注意填写你的真实邮箱。</li>
+<li>按回车三次<br>参考示例：<img src="https://s1.ax1x.com/2018/03/15/94NAsg.png" alt="参考示例"><br>这时会在~目录下生成一个.ssh的隐藏文件 <img src="https://s1.ax1x.com/2018/03/15/94NELQ.png" alt="参考示例2"></li>
+<li>运行 <code>cat ~/.ssh/id_rsa.pub</code>，得到一串东西，完整的复制这串东西</li>
+<li>回到上面第 3 步的页面，在 Title 输入「我的第一个 key」</li>
+<li>在 Key 里粘贴刚刚你你复制的那串东西<br><img src="https://s1.ax1x.com/2018/03/15/94NZZj.png" alt="复制key"></li>
+<li>点击 Add SSH key</li>
+<li>回到 Git Bash</li>
+<li><p>运行 <code>ssh -T git@github.com</code>，你可能会看到这样的提示：<br><img src="http://upload-images.jianshu.io/upload_images/11017215-930bc23329e6f29e..png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提示"></p>
+</li>
+<li><p>输入 <code>yes</code> 回车</p>
+</li>
+<li>然后如果你看到 <code>Permission denied (publickey).</code> 就说明你失败了，请回到第 1 步重来，是的，回到第 1步重来；如果你看到 <code>Hi FrankFang! You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code></li>
+</ol>
+<p><img src="https://s1.ax1x.com/2018/03/15/94Nuiq.png" alt="成功示例"></p>
+<p> 就说明你成功了！</p>
+<ol>
+<li>好了， 添加了一SSH key，接下来就会用到它。</li>
+</ol>
+<blockquote>
+<ul>
+<li>一台电脑只需要一个 SSH key</li>
+<li>一个 SSH key 可以访问你的所有仓库，即使你有 1000000 个仓库，都没问题</li>
+<li>如果你新买了电脑，就在新电脑上重新生成一个 SSH key，把这个 key 也上传到 GitHub，它可以和之前的 key 共存在    GitHub 上</li>
+<li>如果你把 key 从电脑上删除了，重新生成一个 key 即可，替换之前的 key</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/15/使用GitHub（一）：添加SSHkey/" data-id="cjesfz7qu0002i8fbxiogudaz" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-03-Git入门教程" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -152,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/03-Git入门教程/" data-id="cjer4b57p0000ugfb47i0n9cw" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2018/03/14/03-Git入门教程/" data-id="cjesfz7q70000i8fbwpdb9r32" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -381,7 +471,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/第二篇博客/" data-id="cjer4b5800001ugfbjy0tmy45" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2018/03/14/第二篇博客/" data-id="cjesfz7qy0004i8fb5knat5rn" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -417,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/开博大吉/" data-id="cjer4b58f0003ugfbhpleej0m" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2018/03/14/开博大吉/" data-id="cjesfz7qw0003i8fbqolo0koj" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -462,7 +552,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/hello-world/" data-id="cjer4b58b0002ugfb63lwrpyn" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2018/03/14/hello-world/" data-id="cjesfz7qj0001i8fbdyvox9fk" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -488,7 +578,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archivos</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
     </div>
@@ -498,9 +588,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Posts recientes</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/03/15/使用GitHub（一）：添加SSHkey/">使用GitHub（一）：添加SSHkey</a>
+          </li>
         
           <li>
             <a href="/2018/03/14/03-Git入门教程/">Git入门教程</a>
@@ -531,7 +625,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 Taotao Ma<br>
-      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
