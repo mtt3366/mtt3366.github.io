@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,250 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-使用GitHub（二）：配置并使用Git创建版本库" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/16/使用GitHub（二）：配置并使用Git创建版本库/" class="article-date">
+  <time datetime="2018-03-16T11:47:24.000Z" itemprop="datePublished">2018-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/16/使用GitHub（二）：配置并使用Git创建版本库/">使用GitHub（二）：配置并使用Git创建版本库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用GitHub（二）：配置并使用Git创建版本库"><a href="#使用GitHub（二）：配置并使用Git创建版本库" class="headerlink" title="使用GitHub（二）：配置并使用Git创建版本库"></a>使用GitHub（二）：配置并使用Git创建版本库</h1><blockquote>
+<ul>
+<li>本文简单介绍使用GitHub对代码进行版本控制，包括<strong>添加SSHkey</strong>、<strong>配置Git</strong>、<strong>使用Git创建版本库</strong>并在GitHub上进行管理，主要目的是对学习内容进行总结以及方便日后查阅。</li>
+<li>详细教程和原理可以参考<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰的Git教程</a>或<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">猴子都能看懂的Git教程</a>。</li>
+<li>本文版权归马涛涛所有。</li>
+<li>本文所引用的图片和文字版权归原作者所有，侵权删。</li>
+<li>如有错误请在下方评论区指出，欢迎积极讨论。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name 你的英文名</span><br><span class="line">git config --global user.email 你的邮箱</span><br><span class="line">git config --global push.default matching</span><br><span class="line">git config --global core.quotepath false</span><br><span class="line">git config --global core.editor &quot;vim&quot;</span><br></pre></td></tr></table></figure>
+<p>五句话，依次运行。</p>
+<h2 id="使用Git创建版本库"><a href="#使用Git创建版本库" class="headerlink" title="使用Git创建版本库"></a>使用Git创建版本库</h2><hr>
+<p>使用 git 有三种方式，请按照需求选择。</p>
+<ol>
+<li>只在本地使用</li>
+<li>将本地仓库上传到 GitHub</li>
+<li>下载 GitHub 上的仓库</li>
+</ol>
+<blockquote>
+<p> 其中1+2的最终效果=3</p>
+</blockquote>
+<h3 id="1只在本地使用"><a href="#1只在本地使用" class="headerlink" title="1只在本地使用"></a>1只在本地使用</h3><hr>
+<h4 id="1-1-初始化"><a href="#1-1-初始化" class="headerlink" title="1.1 初始化"></a>1.1 初始化</h4><ol>
+<li><p>创建目录作为我们的项目目录：<code>mkdir git-demo-1</code></p>
+</li>
+<li><p>进入目录 <code>cd git-demo-1</code></p>
+</li>
+<li><p><code>git init</code>，这句命令会在 <code>git-demo-1</code> 里创建一个 <code>.git</code> 目录</p>
+</li>
+<li><p><code>ls -la</code> 你就会看到 <code>.git</code>目录，它就是一个「仓库」，不要进去看。</p>
+</li>
+<li><p>在 <code>git-demo-1</code>目录里面添加任意文件，假设我们添加了两个文件，分别是 <code>index.html</code> 和 <code>css/style.css</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch index.html</span><br><span class="line">mkdir css</span><br><span class="line">touch css/style.css</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行 <code>git status -sb</code> 可以看到文件前面有 <code>??</code> 号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch index.html</span><br><span class="line">mkdir css</span><br><span class="line">touch css/style.css</span><br></pre></td></tr></table></figure>
+<p>这个 <code>??</code> 表示 git不知道你要怎么对待这些变动。</p>
+</li>
+<li><p>使用 <code>git add</code> 将文件添加到「暂存区」</p>
+</li>
+</ol>
+<ol>
+<li>你可以一个一个地 add<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add index.html</span><br><span class="line">git add css/style.css</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>你也可以一次性 add</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+<p>意思是把当前目录（.表示当前目录）里面的变动都加到「暂存区」</p>
+</li>
+<li><p>再次运行 <code>git status -sb</code>，可以看到 <code>??</code> 变成了 A</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## Initial commit on master</span><br><span class="line">A  css/style.css</span><br><span class="line">A  index.html</span><br></pre></td></tr></table></figure>
+<p>A 的意思就是添加，也就是说你告诉 git，这些文件我要加到仓库里</p>
+<ol>
+<li><p>使用 <code>git commit -m &quot;信息&quot;</code> 将你 add过的内容「正式提交」到本地仓库（<code>.git</code>就是本地仓库），并添加一些注释信息，方便日后查阅</p>
+</li>
+<li><p>你可以一个一个地 commit</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add index.html</span><br><span class="line">git add css/style.css</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>你也可以一次性 commit</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit . -m &quot;添加了几个文件&quot;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>再再次运行 <code>git status -sb</code>，发现没有文件变动了，这是因为文件的变动已经记录在仓库里了。</li>
+<li><p>这时你使用 <code>git log</code> 就可以看到历史上的变动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">commit f0d95058cd32a332b98967f6c0a701c64a00810a</span><br><span class="line"> Author: frankfang &lt;frankfang1990@gmail.com&gt;</span><br><span class="line"> Date:   Thu Sep 28 22:30:43 2017 +0800</span><br><span class="line"></span><br><span class="line">添加几个文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>以上就是 <code>git add</code> / <code>git commit</code> 的一次完整过程。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="1-2-文件变动"><a href="#1-2-文件变动" class="headerlink" title="1.2 文件变动"></a>1.2 文件变动</h3><p>如果我想继续改文件，应该怎么做呢？</p>
+<ol>
+<li><p><code>start css/style.css</code> 会使用默认的编辑器打开 <code>css/style.css</code>（macOS 上对应的命令是 <code>open css/style.css</code>）</p>
+</li>
+<li><p>然后我们在 <code>css/style.css</code> 里写入 <code>body {background: red}</code>，保存退出</p>
+</li>
+<li><p>运行 <code>git status -sb</code> 发现提示中有一个 <code>M</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## master</span><br><span class="line">M css/style.css</span><br></pre></td></tr></table></figure>
+<p>这个 <code>M</code> 的意思就是 Modified，表示这个文件被修改了</p>
+</li>
+<li><p>此时你如果想让改动保存到仓库里，你需要先 <code>git add css/style.css</code> 或者也可以 <code>git add .</code></p>
+<blockquote>
+<p><strong>注意</strong>：由于这个 <code>css/style.css</code> 以前被我们 add 过，你往文章上面看，我们是 add 过 <code>css/style.css</code>的，所以此处的 git add操作可以省略，但我建议你使用 git 的前一个月，不要省略 git add。</p>
+</blockquote>
+<blockquote>
+<p>换句话说，每一次改动，都要经过 <code>git add</code> 和 <code>git commit</code> 两个命令，才能被添加到 .git 本地仓库里。</p>
+</blockquote>
+</li>
+<li><p>再次运行 <code>git status -sb</code> 发现 M 有红色变成了绿色。</p>
+</li>
+<li>运行 git commit -m` “更新 css/style.css”，这个改动就被提交到 .git 本地仓库了。再说一次，不要去 .git 目录里面。</li>
+<li>再再次运行 <code>git status -sb</code>，会发现没有变更了，这说明所有变动都被本地仓库记录在案了。</li>
+</ol>
+<blockquote>
+<p><strong><code>git status -sb</code> 是什么意思：</strong><br><code>git status</code> 是用来显示当前的文件状态的，哪个文件变动了，方便你进行 <code>git add</code> 操作。</p>
+<ul>
+<li><code>-s</code> 的意思是显示总结（summary）</li>
+<li><code>-b</code> 的意思是显示分支（branch）</li>
+<li>所以 <code>-sb</code> 的意思是显示总结和分支。</li>
+</ul>
+</blockquote>
+<h3 id="1-3-总结"><a href="#1-3-总结" class="headerlink" title="1.3 总结"></a>1.3 总结</h3><p>至此，我们来总结一下用到的命令</p>
+<ol>
+<li><code>git init</code>，初始化本地仓库 <code>.git</code></li>
+<li><code>git status -sb</code>，显示当前所有文件的状态</li>
+<li><code>git add 文件路径</code>，用来将变动加到暂存区</li>
+<li><code>git commit -m &quot;信息&quot;</code>，用来正式提交变动，提交至 <code>.git</code> 仓库</li>
+<li><p>如果有新的变动，我们只需要依次执行 <code>git add xxx</code> 和 <code>git commit -m &#39;xxx&#39;</code> 两个命令即可。</p>
+<blockquote>
+<p>别看本教程废话那么多，其实就这一句有用！先 add 再 commit，行了，你学会 git 了。</p>
+</blockquote>
+</li>
+<li><p><code>git log</code> 查看变更历史</p>
+</li>
+</ol>
+<h2 id="2-将本地仓库上传到-GitHub"><a href="#2-将本地仓库上传到-GitHub" class="headerlink" title="2 将本地仓库上传到 GitHub"></a>2 将本地仓库上传到 GitHub</h2><hr>
+<p>如何将我们这个 git-demo-1 上传到 GitHub 呢？</p>
+<ol>
+<li><p>在 GitHub 上新建一个空仓库，名称随意，一般可以跟本地目录名一致，也叫做 <code>git-demo-1</code><br><img src="https://s1.ax1x.com/2018/03/15/94BcTg.png" alt="建立空仓库"></p>
+<blockquote>
+<p>按照截图所示，除了仓库名，<strong>其他的什么都别改</strong>，这样你才能创建一个<strong>空仓库</strong></p>
+</blockquote>
+</li>
+<li><p>点击创建按钮之后，GitHub 就会把后续的操作全告诉你，如图<br><strong>请点击一下 ssh</strong></p>
+<p> <img src="https://s1.ax1x.com/2018/03/15/94Bqk4.png" alt="点击SSH"><br> <img src="https://s1.ax1x.com/2018/03/15/94BzX6.png" alt="点击SSH2"></p>
+</li>
+<li><p><strong>点击一下 ssh</strong>，你就会使用默认的 HTTPS 地址。但是千万不要使用 HTTPS 地址，因为 HTTPS地址使用起来特别麻烦，每次都要输入密码，而 SSH 不用输入用户名密码。</p>
+<blockquote>
+<p>为什么 SSH 不用密码呢，因为你已经上传了 SSH public key。详情请看上一篇博文使用GitHub（一）</p>
+</blockquote>
+</li>
+<li><p>由于我们已经有本地仓库了，所以图中<strong>下面半部分</strong>就是你需要的命令，我们一行一行拷贝过来执行</p>
+<ul>
+<li>再次点击 SSH 按钮</li>
+<li>命令 <code>git remote add origin git@github.com:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/git-demo-1.git</code>，复制并运行它</li>
+<li>复制第二行 <code>git push -u origin master</code>，运行它</li>
+<li>刷新当前页面，你的仓库就上传到 GitHub 了.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>在建立空库的情况下，以上两步在本地建一个Git仓库和将Git仓库上传到GitHub上加起来就等同于下面的第3条。</p>
+</blockquote>
+<h2 id="3-直接在-GitHub-创建一个仓库，然后下载到本地"><a href="#3-直接在-GitHub-创建一个仓库，然后下载到本地" class="headerlink" title="3 直接在 GitHub 创建一个仓库，然后下载到本地"></a>3 直接在 GitHub 创建一个仓库，然后下载到本地</h2><hr>
+<blockquote>
+<p>上面两步讲了</p>
+<ul>
+<li>在本地创建仓库</li>
+<li>将本地仓库上传到 GitHub</li>
+</ul>
+<p>这里讲第三种用法，那就是直接在 GitHub 创建一个仓库，然后下载到本地</p>
+</blockquote>
+<ol>
+<li>在GitHub 上新建一个仓库<code>git-demo-2</code>，这次就不创建空仓库了，而是自带 <code>README</code> 和 <code>Lisence</code> 的仓库，创建截图如下：<br><img src="https://s1.ax1x.com/2018/03/15/94rn2R.png" alt="创建新的仓库"><br>然后点击创建按钮。</li>
+<li><p>这样一来，这个仓库就会自动拥有三个文件：<br><img src="https://s1.ax1x.com/2018/03/15/94rxeK.png" alt="仓库文件"></p>
+</li>
+<li><p>使用 <code>git clone</code> 命令下载到本地</p>
+</li>
+<li><p>点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层<br><img src="https://s1.ax1x.com/2018/03/15/94sAyt.png" alt="clone"></p>
+<blockquote>
+<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a> 开头的地址，如果不是，就点击 Use SSH 按钮，就<strong>点击<br>Use SSH 按钮</strong>。然后复制这个地址。</p>
+</blockquote>
+</li>
+<li><p>打开 Git Bash，找一个安全的目录，比如 <code>~/Desktop</code> 。<br>运行 <code>git clone 你刚才得到的以git@github.com开头的地址</code>，运行完了你就会发现，桌面上多出一个 <code>git-demo-2</code>。  </p>
+</li>
+<li><code>cd git-demo-2</code>进入这个目录。</li>
+<li>运行 ls -la 你会看到，远程目录的所有文件都在这里出现了，另外你还看到了 <code>.git</code> 本地仓库。这时你就可以添加文件，git add，然后 git commit 了。</li>
+</ol>
+<blockquote>
+<p>三种方式都说完了，它们分别是：</p>
+<ul>
+<li>在本地创建仓库</li>
+<li>将本地仓库上传到 GitHub</li>
+<li>下载 GitHub 上的仓库到本地</li>
+</ul>
+<p>其实呢，还有很多种不同的方式，但是，记住这几种就行了，够用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git<br>命令使用 GitHub 就行</p>
+</blockquote>
+<p><strong>总结：</strong></p>
+<p>回顾一遍已经学到的命令：（这次只多了一个 git clone 命令）</p>
+<ul>
+<li><code>git clone git@github.com:xxxx</code>，下载仓库</li>
+<li><code>git init</code>，初始化本地仓库 .git</li>
+<li><code>git status -sb</code>，显示当前所有文件的状态</li>
+<li><code>git add 文件路径</code>，用来将变动加到暂存区</li>
+<li><code>git commit -m &quot;信息&quot;</code>，用来正式提交变动，提交至 .git 仓库</li>
+<li><p>如果有新的变动，我们只需要依次执行 <code>git add xxx</code> 和 <code>git commit -m &#39;xxx&#39;</code> 两个命令即可。</p>
+<blockquote>
+<p>别看本教程废话那么多，其实就这一句有用！先 add 再 commit，行了，学会 git 了。</p>
+</blockquote>
+</li>
+<li><p><code>git log</code> 查看变更历史</p>
+</li>
+</ul>
+<h2 id="如何上传更新"><a href="#如何上传更新" class="headerlink" title="如何上传更新"></a>如何上传更新</h2><p>你在本地目录有任何变动，只需按照以下顺序就能上传：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add 文件路径</span><br><span class="line">git commit -m &quot;信息&quot;</span><br><span class="line">git pull  （一定不要忘记这一个命令）</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>为何要push之前要pull？<br><strong>push是推送</strong>，<strong>pull是拉取</strong>的意思。假如你在远端修改了文件，然后本地并没有同步更新，这时候你push的时候就会出现错误，因为两端不同步了。多人合作的时候这种问题就会出现的更多，所以现在养成push之前要pull的习惯。</p>
+</blockquote>
+<p>下面是例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd git-demo-1</span><br><span class="line">touch index2.html</span><br><span class="line">git add index2.html</span><br><span class="line">git commit -m &quot;新建 index2.html&quot;</span><br><span class="line">git pull</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<p>然后去 <code>git-demo-1</code> 的 GitHub 页面，就能看到 <code>index2.html</code> 出现在里面了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/16/使用GitHub（二）：配置并使用Git创建版本库/" data-id="cjetvt4qk00005ofbnhhgmdgb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-使用GitHub（一）：添加SSHkey" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -141,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/15/使用GitHub（一）：添加SSHkey/" data-id="cjesfz7qu0002i8fbxiogudaz" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/03/15/使用GitHub（一）：添加SSHkey/" data-id="cjetvt4rt00055ofb86m0j6hg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +486,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/03-Git入门教程/" data-id="cjesfz7q70000i8fbwpdb9r32" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/03/14/03-Git入门教程/" data-id="cjetvt4rb00025ofb8gxbugc4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -471,7 +715,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/第二篇博客/" data-id="cjesfz7qy0004i8fb5knat5rn" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/03/14/第二篇博客/" data-id="cjetvt4rk00045ofb6w28epus" class="article-share-link">Share</a>
       
       
     </footer>
@@ -507,7 +751,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/开博大吉/" data-id="cjesfz7qw0003i8fbqolo0koj" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/03/14/开博大吉/" data-id="cjetvt4rh00035ofb7gsmnl13" class="article-share-link">Share</a>
       
       
     </footer>
@@ -552,7 +796,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/hello-world/" data-id="cjesfz7qj0001i8fbdyvox9fk" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/03/14/hello-world/" data-id="cjetvt4qy00015ofbmvsfg1ek" class="article-share-link">Share</a>
       
       
     </footer>
@@ -578,7 +822,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
     </div>
@@ -588,9 +832,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/03/16/使用GitHub（二）：配置并使用Git创建版本库/">使用GitHub（二）：配置并使用Git创建版本库</a>
+          </li>
         
           <li>
             <a href="/2018/03/15/使用GitHub（一）：添加SSHkey/">使用GitHub（一）：添加SSHkey</a>
@@ -606,10 +854,6 @@
         
           <li>
             <a href="/2018/03/14/开博大吉/">开博大吉</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/14/hello-world/">Hello World</a>
           </li>
         
       </ul>
