@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,87 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-使用GitHub（三）：使用VSCode-GitHub进行版本控制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/16/使用GitHub（三）：使用VSCode-GitHub进行版本控制/" class="article-date">
+  <time datetime="2018-03-16T11:51:29.000Z" itemprop="datePublished">2018-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/16/使用GitHub（三）：使用VSCode-GitHub进行版本控制/">使用GitHub（三）：使用VSCode+GitHub进行版本控制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用GitHub（三）：使用VSCode-GitHub进行版本控制"><a href="#使用GitHub（三）：使用VSCode-GitHub进行版本控制" class="headerlink" title="使用GitHub（三）：使用VSCode+GitHub进行版本控制"></a>使用GitHub（三）：使用VSCode+GitHub进行版本控制</h1><blockquote>
+<ul>
+<li>本文简单介绍<strong>使用VSCode+GitHub进行项目或者代码的版本控制</strong>。本文主要目的是对学习内容进行总结以及方便日后查阅。</li>
+<li>详细教程和原理可以参考<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰的Git教程</a>或<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">猴子都能看懂的Git教程</a>。</li>
+<li>本文版权归马涛涛所有。</li>
+<li>本文所引用的图片和文字版权归原作者所有，侵权删。</li>
+<li>如有错误请在下方评论区指出，欢迎积极讨论。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="使用原理"><a href="#使用原理" class="headerlink" title="使用原理"></a>使用原理</h2><hr>
+<h3 id="1-上节回顾"><a href="#1-上节回顾" class="headerlink" title="1 上节回顾"></a>1 上节回顾</h3><p>上一篇博客详细介绍了<strong>使用 git 的三种方式</strong></p>
+<ul>
+<li>只在本地使用</li>
+<li>将本地仓库上传到 GitHub</li>
+<li>下载 GitHub 上的仓库</li>
+</ul>
+<p>以及<strong>如何上传更新到GitHub</strong>，你在本地目录有任何变动，只需按照以下顺序就能上传：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add 文件路径</span><br><span class="line">git commit -m &quot;信息&quot;</span><br><span class="line">git pull  （一定不要忘记这一个命令）</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h3 id="2-使用原理"><a href="#2-使用原理" class="headerlink" title="2 使用原理"></a>2 使用原理</h3><blockquote>
+<p>本文所写的是使用VSCode中的GitHub功能，可以取代命令行中Git的四步更新的方式，简化上传步骤。</p>
+</blockquote>
+<p>所以<strong>使用VSCode+GitHub进行项目或者代码的版本控制</strong>有以下两种方法：</p>
+<ol>
+<li>在本地使用Git仓库→将仓库上传到GitHub→VScode打开→手动进行4步</li>
+<li>在GitHub上新建仓库，下载仓库到本地→ VScode打开→手动进行4步</li>
+</ol>
+<p>本文只记录<strong>从VScode打开之后</strong>的操作。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>使用VSCode打开项目或代码的仓库<br> <img src="https://s1.ax1x.com/2018/03/15/94IWhq.png" alt="打开仓库"></li>
+<li><p>点击侧边栏的  <strong>源代码管理</strong>按钮，或者快捷键<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd>，这时并没有消息提示。</p>
+<p> <img src="https://s1.ax1x.com/2018/03/15/94I43V.png" alt="源代码管理"></p>
+</li>
+<li><p>这时我们新建一个<code>style_test.css</code>文件，旁边会出现<code>U</code>的符号，意思是更新尚未上传到GitHub</p>
+<p> <img src="https://s1.ax1x.com/2018/03/15/94IxgK.png" alt="更新"></p>
+</li>
+<li><p>再次打开<strong>源代码管理</strong>，发现多了更新提示。<br><img src="https://s1.ax1x.com/2018/03/15/94oiEd.png" alt="此处输入图片的描述"></p>
+</li>
+<li><p>这时就可以提交更新到GitHub了，作用同命令行中的<code>git commit -m &quot;new css file&quot;</code><br><img src="https://s1.ax1x.com/2018/03/15/94oFUA.png" alt="此处输入图片的描述"></p>
+</li>
+<li><p>最后一步是pull和push，分别等同于命令行中的<code>git pull</code>和<code>git push</code><br> <img src="https://s1.ax1x.com/2018/03/15/94oQEj.png" alt="pullpush"></p>
+</li>
+<li><p>查看GitHub，更新成功<br> <img src="https://s1.ax1x.com/2018/03/15/94o8Cq.png" alt="GitHub同步更新"></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/16/使用GitHub（三）：使用VSCode-GitHub进行版本控制/" data-id="cjetvyjxe0003iofbhekv8oh6" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-使用GitHub（二）：配置并使用Git创建版本库" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -295,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/使用GitHub（二）：配置并使用Git创建版本库/" data-id="cjetvt4qk00005ofbnhhgmdgb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/16/使用GitHub（二）：配置并使用Git创建版本库/" data-id="cjetvyjxh0004iofbi3jgves9" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -385,7 +466,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/15/使用GitHub（一）：添加SSHkey/" data-id="cjetvt4rt00055ofb86m0j6hg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/15/使用GitHub（一）：添加SSHkey/" data-id="cjetvyjxa0002iofbl87qij5s" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -486,7 +567,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/03-Git入门教程/" data-id="cjetvt4rb00025ofb8gxbugc4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/14/03-Git入门教程/" data-id="cjetvyjwg0000iofbm4crg8by" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -715,7 +796,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/第二篇博客/" data-id="cjetvt4rk00045ofb6w28epus" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/14/第二篇博客/" data-id="cjetvyjxx0006iofba37vhm0o" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -751,7 +832,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/开博大吉/" data-id="cjetvt4rh00035ofb7gsmnl13" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/14/开博大吉/" data-id="cjetvyjxt0005iofblrtnwbnf" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -796,7 +877,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/hello-world/" data-id="cjetvt4qy00015ofbmvsfg1ek" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/14/hello-world/" data-id="cjetvyjwv0001iofb4zwtvq1y" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -822,7 +903,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
     </div>
@@ -832,9 +913,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/03/16/使用GitHub（三）：使用VSCode-GitHub进行版本控制/">使用GitHub（三）：使用VSCode+GitHub进行版本控制</a>
+          </li>
         
           <li>
             <a href="/2018/03/16/使用GitHub（二）：配置并使用Git创建版本库/">使用GitHub（二）：配置并使用Git创建版本库</a>
@@ -850,10 +935,6 @@
         
           <li>
             <a href="/2018/03/14/第二篇博客/">Git Bash命令行基础</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/14/开博大吉/">开博大吉</a>
           </li>
         
       </ul>
