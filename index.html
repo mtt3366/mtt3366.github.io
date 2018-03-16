@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,81 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="hexo+github-搭建个人博客（二）：更改博客主题、上传源代码" class="article article-type-hexo+github" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/16/搭建个人博客（二）：更改博客主题、上传源代码/" class="article-date">
+  <time datetime="2018-03-16T12:01:06.000Z" itemprop="datePublished">2018-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/16/搭建个人博客（二）：更改博客主题、上传源代码/">搭建个人博客（二）：更改博客主题、上传源代码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Hexo-GitHub-搭建个人博客（二）：更改博客主题、上传源代码"><a href="#Hexo-GitHub-搭建个人博客（二）：更改博客主题、上传源代码" class="headerlink" title="#Hexo+GitHub 搭建个人博客（二）：更改博客主题、上传源代码"></a>#Hexo+GitHub 搭建个人博客（二）：更改博客主题、上传源代码</h2><p><img src="http://upload-images.jianshu.io/upload_images/11017215-ea37faa6f2baebe3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HEXO+GitHub：pages"></p>
+<blockquote>
+<ul>
+<li>本文简单介绍<strong>Hexo+GitHub 搭建博客</strong>。本文主要目的是对学习内容进行总结以及方便日后查阅。</li>
+<li>详细教程和原理可以参考<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo官方中文文档</a>。</li>
+<li>本文版权归马涛涛所有。</li>
+<li>本文所引用的图片和文字版权归原作者所有，侵权删。</li>
+<li>如有错误请在下方评论区指出，欢迎积极讨论。</li>
+</ul>
+</blockquote>
+<h2 id="换博客主题"><a href="#换博客主题" class="headerlink" title="换博客主题"></a>换博客主题</h2><ol>
+<li><a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</li>
+<li>还可以在线预览效果，找一个喜欢的主题，进入主题的 GitHub 首页，比如<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">https://github.com/hexojs/hexo/wiki/Themes</a>。</li>
+<li>复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:iissnan/hexo-theme-next.git</li>
+<li><code>cd themes</code></li>
+<li><code>git clone git@github.com:iissnan/hexo-theme-next.git</code></li>
+<li><code>cd ..</code></li>
+<li><code>start _config.yml</code>进入<code>_config.yml</code>将 <code>_config.yml</code> 的第 75 行改为 <code>theme: hexo-theme-next</code>，保存</li>
+<li><code>hexo generate</code></li>
+<li><code>hexo deploy</code></li>
+<li>等一分钟，然后刷新你的博客页面，你会看到一个新的外观。如果不喜欢这个主题，就回到第 1 步，重选一个主题。<h2 id="上传Hexo项目源代码到GitHub"><a href="#上传Hexo项目源代码到GitHub" class="headerlink" title="上传Hexo项目源代码到GitHub"></a>上传Hexo项目源代码到GitHub</h2></li>
+</ol>
+<blockquote>
+<p>注意「你的用户名.github.io」上保存的只是你的<strong>博客</strong>，并没有保存「<strong>生成博客的程序代码</strong>」，你需要再创建一个名为blog-generator 的<strong>空仓库</strong>，用来保存 myBlog 里面的「生成博客的程序代码」</p>
+</blockquote>
+<ol>
+<li><p>在 GitHub 创建 blog-generator 空仓库，对GitHub不熟悉的可以参考博客前面的GitHub教程。</p>
+</li>
+<li><p>首先<code>cd</code> 命令进入 <code>myBlog</code> 目录，然后按照截图中的命令执行即可，记住，别用 HTTPS 地址，用SSH地址。</p>
+<blockquote>
+<p>这样一来，你的博客发布在了<strong>「你的用户名.github.io」</strong>这个链接，而你的「生成博客的程序代码」发布在了 <strong>[blog-generator]</strong>这个<strong>仓库</strong>。所有数据万无一失，你就不会因为误删 myBlog 目录而痛哭了。</p>
+</blockquote>
+</li>
+<li><p>以后每次 <code>hexo deploy</code> 部署完一篇新的博文后，博客就会更新；然后你还要要 <code>add</code> / <code>commit</code> /<code>push</code> 一下<strong>「生成博客的程序代码」</strong>，以防万一。如下图<img src="http://upload-images.jianshu.io/upload_images/11017215-bb8016fd4d6cc65b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="示例"></p>
+<blockquote>
+<p>再强调一遍，这个 <strong>[blog-generator]</strong>仓库就是用来生成博客的程序，而<strong>「你的用户名.github.io」</strong>仓库就是你的博客页面。</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/16/搭建个人博客（二）：更改博客主题、上传源代码/" data-id="cjetw8gpm000764fbnh2gw86j" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="hexo+github-搭建个人博客（一）：安装、配置和第一篇博客" class="article article-type-hexo+github" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -143,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/搭建个人博客（一）：安装、配置和第一篇博客/" data-id="cjetw5qrs0005jwfbg52th2jn" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/16/搭建个人博客（一）：安装、配置和第一篇博客/" data-id="cjetw8gpk000664fbi2h0cjql" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -224,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/使用GitHub（三）：使用VSCode-GitHub进行版本控制/" data-id="cjetw5qqz0001jwfbmyeom45q" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/16/使用GitHub（三）：使用VSCode-GitHub进行版本控制/" data-id="cjetw8goz000264fb7bcubzy1" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -468,7 +543,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/16/使用GitHub（二）：配置并使用Git创建版本库/" data-id="cjetw5qrh0004jwfb8vfpldyl" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/16/使用GitHub（二）：配置并使用Git创建版本库/" data-id="cjetw8gp2000364fbncej843i" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -558,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/15/使用GitHub（一）：添加SSHkey/" data-id="cjetw5qrf0003jwfbpo92a31h" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/15/使用GitHub（一）：添加SSHkey/" data-id="cjetw8gp5000464fb8g6665d7" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -659,7 +734,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/03-Git入门教程/" data-id="cjetw5qqm0000jwfbwxdzscgr" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/14/03-Git入门教程/" data-id="cjetw8gob000064fbeckdsoe9" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -888,7 +963,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/第二篇博客/" data-id="cjetw5qsf0006jwfbi6iibtfg" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/14/第二篇博客/" data-id="cjetw8gpo000864fbb9cv02np" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -924,7 +999,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/开博大吉/" data-id="cjetw5qsj0007jwfb14naalmm" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/14/开博大吉/" data-id="cjetw8gph000564fb2wttk9fr" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -969,7 +1044,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/14/hello-world/" data-id="cjetw5qrb0002jwfbswn56zog" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/14/hello-world/" data-id="cjetw8gon000164fbg3t34pyv" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -995,7 +1070,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
     </div>
@@ -1005,9 +1080,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/03/16/搭建个人博客（二）：更改博客主题、上传源代码/">搭建个人博客（二）：更改博客主题、上传源代码</a>
+          </li>
         
           <li>
             <a href="/2018/03/16/搭建个人博客（一）：安装、配置和第一篇博客/">搭建个人博客（一）：安装、配置和第一篇博客</a>
@@ -1025,10 +1104,6 @@
             <a href="/2018/03/15/使用GitHub（一）：添加SSHkey/">使用GitHub（一）：添加SSHkey</a>
           </li>
         
-          <li>
-            <a href="/2018/03/14/03-Git入门教程/">Git入门教程</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1042,7 +1117,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 Taotao Ma<br>
-      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
